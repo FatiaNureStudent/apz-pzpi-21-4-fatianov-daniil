@@ -24,5 +24,23 @@ public class Order {
     private String number;
     private String receiptCode;
     private LocalDateTime creationDate;
+    private Status status;
     private List<Item> items;
+
+    public Order(Integer userId,
+                 Integer vehicleId,
+                 Integer departureStationId,
+                 Integer arrivalStationId,
+                 String number,
+                 List<Item> items) {
+        this.userId = userId;
+        this.vehicleId = vehicleId;
+        this.departureStationId = departureStationId;
+        this.arrivalStationId = arrivalStationId;
+        this.number = number;
+        this.receiptCode = receiptCode;
+        this.creationDate = creationDate;
+        this.status = status;
+        this.items = items;
+    }
 }
