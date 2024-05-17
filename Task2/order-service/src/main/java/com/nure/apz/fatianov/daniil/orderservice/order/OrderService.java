@@ -1,5 +1,9 @@
 package com.nure.apz.fatianov.daniil.orderservice.order;
 
+import com.nure.apz.fatianov.daniil.orderservice.model.OrderModel;
+import com.nure.apz.fatianov.daniil.orderservice.request.OrderAddRequestBody;
+import com.nure.apz.fatianov.daniil.orderservice.request.OrderChangeRequestBody;
+import com.nure.apz.fatianov.daniil.orderservice.request.OrderProcessRequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +31,7 @@ public class OrderService {
         return passwordBuilder.toString();
     }
 
-    public void addOrder(OrderAddRequestBody requestBody) {
+    public void addOrder(OrderAddRequestBody requestBody, String authorizationHeader) {
         //Todo Зробити генерацію номеру за допомогою шифрування
         // обробника,отримувача, точок відправлення та отримання та країни,
         // на прикладі номеру замовлень нової пошти
@@ -44,10 +48,12 @@ public class OrderService {
                     + optionalOrder.get().getStatus());
         }
 
+        //TODO зробити запит на отримання айдішника користувача по токену на сервіс аутентифікації
+
         Order newOrder = new Order(
-                requestBody.getUserId(),
-                requestBody.getVehicleId(),
-                requestBody.getDepartureStationId(),
+                9999,                               // TEST
+//                requestBody.getVehicleId(),
+//                requestBody.getDepartureStationId(),
                 requestBody.getArrivalStationId(),
                 requestBody.getNumber(),
                 requestBody.getItems()
@@ -78,7 +84,9 @@ public class OrderService {
         return orderModels;
     }
 
-    public void changeOrder(OrderChangeRequestBody requestBody) {
+    public void changeOrder(
+            OrderChangeRequestBody requestBody
+    ) {
         Optional<Order> optionalOrder = orderRepository.findById(requestBody.getId());
         if(optionalOrder.isEmpty()) {
             throw new IllegalStateException("Order with id " + requestBody.getId() + " does not exist");
@@ -93,15 +101,51 @@ public class OrderService {
                     requestBody.getId() + " already has" + newOrder.getStatus());
         }
 
-        newOrder.setUserId(requestBody.getUserId());
-        newOrder.setVehicleId(requestBody.getVehicleId());
-        newOrder.setDepartureStationId(requestBody.getDepartureStationId());
+//        newOrder.setVehicleId(requestBody.getVehicleId());
+//        newOrder.setDepartureStationId(requestBody.getDepartureStationId());
         newOrder.setArrivalStationId(requestBody.getArrivalStationId());
         newOrder.setItems(requestBody.getItems());
-        newOrder.setStatus(Status.CREATED);
 
         //TODO додати повідомлення про зміну замовлення;
 
         orderRepository.save(newOrder);
+    }
+
+    public void processOrder(
+            OrderProcessRequestBody requestBody
+    ) {
+        Optional<Order> optionalOrder = orderRepository.findById(requestBody.getId());
+        if(optionalOrder.isEmpty()) {
+            throw new IllegalStateException("Order with id " + requestBody.getId() + " does not exist");
+        }
+
+        Order newOrder = optionalOrder.get();
+
+        if(newOrder.getStatus() == Status.RECEIVED ||
+                newOrder.getStatus() == Status.DENIED ||
+                newOrder.getStatus() == Status.SENT) {
+            throw new IllegalStateException("Order with id " +
+                    requestBody.getId() + " already has" + newOrder.getStatus());
+        }
+
+        newOrder.setVehicleId(requestBody.getVehicleId());
+        newOrder.setDepartureStationId(requestBody.getDepartureStationId());
+        newOrder.setItems(requestBody.getItems());
+        newOrder.setStatus(Status.PROCESSED);
+
+        //TODO додати повідомлення про зміну замовлення;
+
+        orderRepository.save(newOrder);
+    }
+
+    public void updateOrderStatus(String id, Status status) {
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if(optionalOrder.isEmpty()) {
+            throw new IllegalStateException("Order with id: " + id + " does not exist");
+        }
+
+        Order order = optionalOrder.get();
+        order.setStatus(status);
+        orderRepository.save(order);
     }
 }

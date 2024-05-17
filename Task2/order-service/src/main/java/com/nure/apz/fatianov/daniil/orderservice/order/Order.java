@@ -38,9 +38,24 @@ public class Order {
         this.departureStationId = departureStationId;
         this.arrivalStationId = arrivalStationId;
         this.number = number;
-        this.receiptCode = receiptCode;
-        this.creationDate = creationDate;
-        this.status = status;
+//        this.receiptCode = receiptCode;
+//        this.creationDate = creationDate;
+//        this.status = status;
+        this.items = items;
+    }
+
+    public Order(Integer userId,
+                 Integer arrivalStationId,
+                 String number,
+                 List<Item> items) {
+        this.userId = userId;
+//        this.vehicleId = vehicleId;
+//        this.departureStationId = departureStationId;
+        this.arrivalStationId = arrivalStationId;
+        this.number = number;
+//        this.receiptCode = receiptCode;
+//        this.creationDate = creationDate;
+//        this.status = status;
         this.items = items;
     }
 }

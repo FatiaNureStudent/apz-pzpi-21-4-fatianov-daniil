@@ -1,5 +1,8 @@
-package com.nure.apz.fatianov.daniil.orderservice.order;
+package com.nure.apz.fatianov.daniil.orderservice.model;
 
+import com.nure.apz.fatianov.daniil.orderservice.order.Item;
+import com.nure.apz.fatianov.daniil.orderservice.order.Order;
+import com.nure.apz.fatianov.daniil.orderservice.order.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

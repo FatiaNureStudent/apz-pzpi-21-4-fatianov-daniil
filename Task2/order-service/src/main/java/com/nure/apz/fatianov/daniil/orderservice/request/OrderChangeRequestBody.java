@@ -1,5 +1,6 @@
-package com.nure.apz.fatianov.daniil.orderservice.order;
+package com.nure.apz.fatianov.daniil.orderservice.request;
 
+import com.nure.apz.fatianov.daniil.orderservice.order.Item;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,8 +15,8 @@ import java.util.List;
 public class OrderChangeRequestBody {
     private String id;
     private Integer userId;
-    private Integer vehicleId;
-    private Integer departureStationId;
+//    private Integer vehicleId;
+//    private Integer departureStationId;
     private Integer arrivalStationId;
     private List<Item> items;
 }

@@ -4,6 +4,7 @@ public enum Status {
     CREATED,
     PROCESSED,
     SENT,
+    DELIVERED,
     RECEIVED,
     DENIED
 }
