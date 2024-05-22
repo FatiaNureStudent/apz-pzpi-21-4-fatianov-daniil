@@ -4,6 +4,10 @@ import com.nure.apz.fatianov.daniil.orderservice.model.OrderModel;
 import com.nure.apz.fatianov.daniil.orderservice.request.OrderAddRequestBody;
 import com.nure.apz.fatianov.daniil.orderservice.request.OrderChangeRequestBody;
 import com.nure.apz.fatianov.daniil.orderservice.request.OrderProcessRequestBody;
+import com.nure.apz.fatianov.daniil.orderservice.request.OrderSendRequestBody;
+import com.nure.apz.fatianov.daniil.orderservice.response.OrderAdminGetResponseEntity;
+import com.nure.apz.fatianov.daniil.orderservice.response.OrderUserGetResponse;
+import com.nure.apz.fatianov.daniil.orderservice.response.OrderVehicleGetResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -38,12 +42,11 @@ public class OrderController {
     }
 
     @GetMapping("/get-all")
-    public ResponseEntity<List<OrderModel>> getAll() {
+    public ResponseEntity<List<OrderAdminGetResponseEntity>> getAll() {
         try {
             return ResponseEntity.ok(orderService.getAll());
         } catch (Exception e) {
-            List<OrderModel> emptyList = new ArrayList<>();
-            return new ResponseEntity<>(emptyList, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -100,4 +103,40 @@ public class OrderController {
         Status[] allStatuses = Status.values();
         return ResponseEntity.ok(allStatuses);
     }
+
+    @GetMapping("/get-order-for-vehicle")
+    public ResponseEntity<OrderVehicleGetResponse> getOrderForVehicle(
+            @RequestParam Integer droneId
+    ) {
+        try {
+            return ResponseEntity.ok(orderService.getOrderForVehicle(droneId));
+        } catch (Exception e) {
+            return new ResponseEntity<>(new OrderVehicleGetResponse(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/get-orders-for-user")
+    public ResponseEntity<List<OrderUserGetResponse>> getOrderForVehicle(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+    ) {
+        try {
+            return ResponseEntity.ok(orderService.getOrdersForUser(token));
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+//    @PostMapping("/send")
+//    public ResponseEntity<String> sendOrder(
+//            @RequestBody OrderSendRequestBody requestBody
+//    ){
+//        try {
+//            orderService.sendOrder(requestBody);
+//            return ResponseEntity.ok().body("Order status updated successfully");
+//        } catch (Exception e) {
+//            return ResponseEntity
+//                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("Failed to send order status: " + e.getMessage());
+//        }
+//    }
 }
