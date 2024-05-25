@@ -5,6 +5,7 @@ import com.nure.apz.fatianov.daniil.AuthService.user.Role;
 import com.nure.apz.fatianov.daniil.AuthService.user.User;
 import com.nure.apz.fatianov.daniil.AuthService.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -61,5 +63,37 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    public Boolean isAdmin(String token) {
+        try{
+            String username = jwtService.extractUsername(token);
+            Optional<User> optionalUser = userRepository.findByEmail(username);
+            if(optionalUser.isEmpty()) {
+                throw new UsernameNotFoundException("User not found");
+            }
+
+            User user = optionalUser.get();
+            return jwtService.isAdmin(token, user);
+
+        }catch (Exception e){
+            throw new UsernameNotFoundException("Something wrong: " + e.getMessage());
+        }
+    }
+
+    public Boolean isUser(String token) {
+        try{
+            String username = jwtService.extractUsername(token);
+            Optional<User> optionalUser = userRepository.findByEmail(username);
+            if(optionalUser.isEmpty()) {
+                throw new UsernameNotFoundException("User not found");
+            }
+
+            User user = optionalUser.get();
+            return jwtService.isUser(token, user);
+
+        }catch (Exception e){
+            throw new UsernameNotFoundException("Something wrong: " + e.getMessage());
+        }
     }
 }
