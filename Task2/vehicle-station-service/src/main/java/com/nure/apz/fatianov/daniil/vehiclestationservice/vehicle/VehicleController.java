@@ -4,6 +4,7 @@ import com.nure.apz.fatianov.daniil.vehiclestationservice.vehicle.request.Vehicl
 import com.nure.apz.fatianov.daniil.vehiclestationservice.vehicle.request.VehicleChangeRequest;
 import com.nure.apz.fatianov.daniil.vehiclestationservice.vehicle.response.VehicleGetAllResponseEntity;
 import lombok.RequiredArgsConstructor;
+import org.locationtech.jts.geom.Coordinate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -88,5 +89,14 @@ public class VehicleController {
 
 
     //TODO зробити SEND функцію
-
+    @GetMapping("/send")
+    public ResponseEntity<List<Coordinate>> sendVehicle(
+            @RequestParam String number
+    ){
+        try{
+            return ResponseEntity.ok().body(vehicleService.sendVehicle(number));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(new ArrayList<>());
+        }
+    }
 }
