@@ -14,9 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderChangeRequestBody {
     private String id;
-    private Integer userId;
+//    private Integer userId;
 //    private Integer vehicleId;
 //    private Integer departureStationId;
-    private Integer arrivalStationId;
+    private String arrivalStationNumber;
     private List<Item> items;
 }

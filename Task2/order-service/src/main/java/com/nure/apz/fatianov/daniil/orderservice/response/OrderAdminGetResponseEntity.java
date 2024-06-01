@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Data
@@ -22,7 +23,7 @@ public class OrderAdminGetResponseEntity {
     private String arrivalStationNumber;
     private String number;
     private String receiptCode;
-    private LocalDateTime creationDate;
+    private ZonedDateTime creationDate;
     private Status status;
     private List<Item> items;
 }

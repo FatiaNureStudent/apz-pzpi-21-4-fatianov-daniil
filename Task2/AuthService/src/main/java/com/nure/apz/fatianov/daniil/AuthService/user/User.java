@@ -9,6 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -22,16 +24,17 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ddp_user_seq_gen")
+    @SequenceGenerator(name = "ddp_user_seq_gen", sequenceName = "ddp_user_seq", allocationSize = 1)
     private Integer id;
     private String name;
     private String surname;
     private String email;
     private String phone;
     private String password;
-    private Date birthday;
+    private ZonedDateTime birthday;
     private String gender;
-    private Date creationDate;
+    private ZonedDateTime creationDate;
 
     @Enumerated(EnumType.STRING)
     private Role role;

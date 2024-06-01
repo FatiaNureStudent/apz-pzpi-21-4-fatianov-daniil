@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VehicleAddRequest {
-    private String number;
     private Double liftingCapacity;// in kilograms
     private Double flightDistance;// in kilometers
     private String stationNumber;

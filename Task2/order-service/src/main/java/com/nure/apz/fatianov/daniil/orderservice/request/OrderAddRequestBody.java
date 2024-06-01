@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class OrderAddRequestBody {
 //    private Integer userId;
 //    private Integer vehicleId;
 //    private Integer departureStationId;
-    private Integer arrivalStationId;
-    private String number;
+    private String arrivalStationNumber;
+//    private String number;
     private ZonedDateTime creationDate;
     private List<Item> items;
 }

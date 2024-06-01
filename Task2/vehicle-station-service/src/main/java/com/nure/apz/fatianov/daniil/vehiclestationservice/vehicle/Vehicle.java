@@ -15,14 +15,15 @@ import lombok.NoArgsConstructor;
 @Table(name = "vehicle")
 public class Vehicle {
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vehicle_seq_gen")
+    @SequenceGenerator(name = "vehicle_seq_gen", sequenceName = "vehicle_seq", allocationSize = 1)    private Integer id;
     private String number;
     private Double liftingCapacity;// in kilograms
     private Double flightDistance;// in kilometers
     @ManyToOne
     @JoinColumn(name = "station_id")
     private Station station;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
 }

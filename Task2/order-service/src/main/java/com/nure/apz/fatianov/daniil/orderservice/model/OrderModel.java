@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Data
@@ -23,7 +25,7 @@ public class OrderModel {
     private Integer arrivalStationId;
     private String number;
     private String receiptCode;
-    private LocalDateTime creationDate;
+    private ZonedDateTime creationDate;
     private Status status;
     private List<Item> items;
 
@@ -36,7 +38,7 @@ public class OrderModel {
         model.setArrivalStationId(order.getArrivalStationId());
         model.setNumber(order.getNumber());
         model.setReceiptCode(order.getReceiptCode());
-        model.setCreationDate(order.getCreationDate());
+        model.setCreationDate(order.getCreationDate().atZone(ZoneOffset.UTC));
         model.setStatus(order.getStatus());
         model.setItems(order.getItems());
         return model;

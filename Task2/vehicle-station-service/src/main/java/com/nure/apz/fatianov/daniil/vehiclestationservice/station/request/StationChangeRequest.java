@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StationChangeRequest {
-    private Integer id;
     private String number;
     private String description;
     private Double latitude;

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Data
@@ -16,10 +17,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderUserGetResponse {
+    private String id;
     private String arrivalStationNumber;
+    private String departureStationNumber;
     private String number;
     private String receiptCode;
-    private LocalDateTime creationDate;
+    private ZonedDateTime creationDate;
     private Status status;
     private List<Item> items;
 }

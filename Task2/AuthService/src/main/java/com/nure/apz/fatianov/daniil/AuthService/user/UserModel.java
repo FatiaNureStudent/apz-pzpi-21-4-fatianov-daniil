@@ -2,6 +2,8 @@ package com.nure.apz.fatianov.daniil.AuthService.user;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Getter
@@ -14,9 +16,9 @@ public class UserModel {
     private String surname;
     private String email;
     private String phone;
-    private Date birthday;
+    private ZonedDateTime birthday;
     private String gender;
-    private Date creationDate;
+    private ZonedDateTime creationDate;
 
     @Override
     public String toString() {

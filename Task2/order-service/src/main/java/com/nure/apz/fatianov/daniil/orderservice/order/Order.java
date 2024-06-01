@@ -4,7 +4,9 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Getter
@@ -23,7 +25,7 @@ public class Order {
     private Integer arrivalStationId;
     private String number;
     private String receiptCode;
-    private LocalDateTime creationDate;
+    private Instant creationDate;
     private Status status;
     private List<Item> items;
 
@@ -38,9 +40,6 @@ public class Order {
         this.departureStationId = departureStationId;
         this.arrivalStationId = arrivalStationId;
         this.number = number;
-//        this.receiptCode = receiptCode;
-//        this.creationDate = creationDate;
-//        this.status = status;
         this.items = items;
     }
 
@@ -49,13 +48,8 @@ public class Order {
                  String number,
                  List<Item> items) {
         this.userId = userId;
-//        this.vehicleId = vehicleId;
-//        this.departureStationId = departureStationId;
         this.arrivalStationId = arrivalStationId;
         this.number = number;
-//        this.receiptCode = receiptCode;
-//        this.creationDate = creationDate;
-//        this.status = status;
         this.items = items;
     }
 }
