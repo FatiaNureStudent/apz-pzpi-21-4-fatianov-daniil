@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import MainContent from "./components/MainContent";
 import { BrowserRouter as Router } from 'react-router-dom';
+import Users from './pages/Users';
 
 
 const App: React.FC = () => {
@@ -21,7 +22,7 @@ const App: React.FC = () => {
                         <Routes>
                             <Route path="/login" element={<Authentication/>}/>
                             <Route element={<PrivateRoute/>}>
-                                {/* Ваші маршрути */}
+                                <Route path="/users" element={<Users />} />
                             </Route>
                         </Routes>
                     </MainContent>

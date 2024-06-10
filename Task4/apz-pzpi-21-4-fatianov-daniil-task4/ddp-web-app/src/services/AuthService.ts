@@ -26,6 +26,7 @@ const login = async (email: string, password: string): Promise<AuthResult> => {
 
         if (isAdminResponse.data) {
             localStorage.setItem('user', JSON.stringify({ token }));
+            console.log('Token: ' + token);
             return { isAuthenticated: true, token };
         } else {
             throw new Error("User is not an administrator");
