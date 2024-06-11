@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { addVehicle } from '../services/VehicleService';
-import { fetchStations } from '../services/StationService';
+import { fetchStationsBasing } from '../services/StationService';
 import { Box, Button, TextField } from '@mui/material';
 import Dropdown from '../components/Dropdown';
 
@@ -23,7 +23,7 @@ const VehicleCreate: React.FC = () => {
 
     useEffect(() => {
         if (token) {
-            fetchStations(token).then(setStations).catch(console.error);
+            fetchStationsBasing(token).then(setStations).catch(console.error);
         }
     }, [token]);
 

@@ -19,7 +19,7 @@ interface Vehicle {
 const API_URL = 'http://localhost:8084/vehicle-station-service/station/';
 
 // Функція для отримання станцій, що підтримує фільтрацію за типом "BASING"
-const fetchStations = async (token: string): Promise<{ label: string; value: string }[]> => {
+const fetchStationsBasing = async (token: string): Promise<{ label: string; value: string }[]> => {
     const response = await axios.get<Station[]>(`${API_URL}get-all`, {
         headers: {
             Authorization: `Bearer ${token}`
@@ -34,4 +34,73 @@ const fetchStations = async (token: string): Promise<{ label: string; value: str
         }));
 }
 
+interface Station {
+    id: number;
+    number: string;
+    description: string;
+    latitude: number;
+    longitude: number;
+    altitude: number;
+    type: string;
+    vehicles: { number: string; status: string }[];
+}
+
+const fetchStations = async (token: string): Promise<Station[]> => {
+    const response = await axios.get<Station[]>(`${API_URL}get-all`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    return response.data;
+}
+
+interface StationAddRequest {
+    description: string;
+    latitude: number;
+    longitude: number;
+    altitude: number;
+    type: string;
+}
+
+const addStation = async (stationData: StationAddRequest, token: string): Promise<void> => {
+    const headers = {
+        Authorization: `Bearer ${token}`
+    };
+    try {
+        // Виконуємо POST запит для додавання станції
+        await axios.post(`${API_URL}add`, stationData, { headers });
+        console.log('Station added successfully');
+    } catch (error: any) {
+        // Ловимо помилки, якщо запит не вдається
+        throw new Error(`Failed to add station: ${error.response?.data.message || error.message}`);
+    }
+};
+
+
+interface StationChangeRequest {
+    number: string;
+    description: string;
+    latitude: number;
+    longitude: number;
+    altitude: number;
+    type: string;
+}
+
+const changeStation = async (stationData: StationChangeRequest, token: string): Promise<void> => {
+    try {
+        const response = await axios.put(`${API_URL}change-station`, stationData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log('Station updated successfully:', response.data);
+    } catch (error) {
+        console.error('Failed to update station:', error);
+        throw error;
+    }
+}
+
+export { changeStation };
+export { addStation };
 export { fetchStations };
+export { fetchStationsBasing };

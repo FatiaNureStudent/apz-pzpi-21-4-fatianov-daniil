@@ -12,7 +12,9 @@ import Users from './pages/Users';
 import Vehicles from "./pages/Vehicles";
 import VehicleCreate from "./pages/VehicleCreate";
 import VehicleChange from "./pages/VehicleChange";
-
+import Stations from "./pages/Stations";
+import StationCreate from "./pages/StationCreate";
+import StationChange from "./pages/StationChange";
 
 const App: React.FC = () => {
     return (
@@ -29,6 +31,9 @@ const App: React.FC = () => {
                                 <Route path="/vehicles" element={<Vehicles />} />
                                 <Route path="/vehicles/create" element={<VehicleCreate />} />
                                 <Route path="/vehicles/change/:id" element={<VehicleChange />} />
+                                <Route path="/stations" element={<Stations />} />
+                                <Route path="/stations/create" element={<StationCreate />} />
+                                <Route path="/stations/change/:id" element={<StationChange />} />
                             </Route>
                         </Routes>
                     </MainContent>
