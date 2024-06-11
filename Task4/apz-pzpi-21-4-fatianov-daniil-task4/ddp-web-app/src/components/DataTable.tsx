@@ -74,20 +74,18 @@ const DataTable: React.FC<DataTableProps> = ({
                 {tableRows.map((row, id) => (
                     <TableRow key={id}>
                         {Object.keys(row).map((cellName, i) => (
-                            <React.Fragment key={i}>
-                                <TableCell>{row[cellName]}</TableCell>
-                                {i === Object.keys(row).length - 1 && buttonAction && (
-                                    <TableCell>
-                                        <Button
-                                            onClick={() => buttonAction(row)}
-                                            variant="outlined"
-                                        >
-                                            {buttonLabel}
-                                        </Button>
-                                    </TableCell>
-                                )}
-                            </React.Fragment>
+                            <TableCell key={`${id}-${i}`}>{row[cellName]}</TableCell>
                         ))}
+                        {buttonAction && (
+                            <TableCell>
+                                <Button
+                                    onClick={() => buttonAction(row)}
+                                    variant="outlined"
+                                >
+                                    {buttonLabel}
+                                </Button>
+                            </TableCell>
+                        )}
                     </TableRow>
                 ))}
                 </tbody>
