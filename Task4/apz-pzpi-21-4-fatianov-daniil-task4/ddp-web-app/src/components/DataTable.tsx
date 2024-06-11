@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '@mui/material';
+import {Button} from '@mui/material';
 
 const TableContainer = styled.div`
     margin: 1em 0;
-    /* width: 90%; */
-    /* max-width: 800px; */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
@@ -33,9 +31,11 @@ const TableRow = styled.tr`
 const TableCell = styled.td`
     padding: 1em;
     border-bottom: 1px solid #ddd;
-    &:first-child {
-        width: 2%;
-    }
+`;
+
+const ActionButton = styled(Button)`
+    display: block;
+    margin: 0 auto;
 `;
 
 interface RowProps {
@@ -56,7 +56,7 @@ const DataTable: React.FC<DataTableProps> = ({
                                                  tableRows,
                                                  tableButton,
                                              }) => {
-    const { buttonAction, buttonLabel } = tableButton ?? {};
+    const {buttonAction, buttonLabel} = tableButton ?? {};
     return (
         <TableContainer>
             <StyledTable>
@@ -78,12 +78,12 @@ const DataTable: React.FC<DataTableProps> = ({
                         ))}
                         {buttonAction && (
                             <TableCell>
-                                <Button
+                                <ActionButton
                                     onClick={() => buttonAction(row)}
                                     variant="outlined"
                                 >
                                     {buttonLabel}
-                                </Button>
+                                </ActionButton>
                             </TableCell>
                         )}
                     </TableRow>

@@ -64,7 +64,6 @@ const changeVehicle = async (vehicleData: VehicleChangeRequest, token: string): 
 }
 
 
-
-export { fetchVehicles };
-export { addVehicle };
-export { changeVehicle };
+export {fetchVehicles};
+export {addVehicle};
+export {changeVehicle};

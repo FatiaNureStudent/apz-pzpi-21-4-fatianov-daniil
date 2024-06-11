@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import DataTable from '../components/DataTable';
-import { fetchUsers } from '../services/UserService';
-import { AuthContext } from '../context/AuthContext';
+import {fetchUsers} from '../services/UserService';
+import {AuthContext} from '../context/AuthContext';
 
-// Визначення інтерфейсу для користувача
 interface User {
     id: number;
     name: string;
@@ -52,15 +51,19 @@ const Users: React.FC = () => {
         surname: user.surname,
         email: user.email,
         phone: user.phone,
-        birthday: user.birthday,
+        birthday: new Date(user.birthday).toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }),
         gender: user.gender,
-        'Date of creation': user.creationDate
+        'Date of creation': new Date(user.creationDate).toLocaleString()
     }));
 
     return (
         <>
             <h1>Users</h1>
-            <DataTable tableHeader={tableHeader} tableRows={adaptedUsers} />
+            <DataTable tableHeader={tableHeader} tableRows={adaptedUsers}/>
         </>
     );
 };

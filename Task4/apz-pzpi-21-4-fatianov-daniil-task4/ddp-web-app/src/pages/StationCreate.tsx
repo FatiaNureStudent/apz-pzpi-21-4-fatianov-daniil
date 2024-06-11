@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { addStation } from '../services/StationService';
-import { Box, Button, TextField } from '@mui/material';
+import React, {useState, useContext} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {AuthContext} from '../context/AuthContext';
+import {addStation} from '../services/StationService';
+import {Box, Button, TextField} from '@mui/material';
 import Dropdown from '../components/Dropdown';
 
 const StationCreate: React.FC = () => {
@@ -16,8 +16,8 @@ const StationCreate: React.FC = () => {
     const [type, setType] = useState('');
 
     const types = [
-        { label: 'BASING', value: 'BASING' },
-        { label: 'RECEIVING', value: 'RECEIVING' },
+        {label: 'BASING', value: 'BASING'},
+        {label: 'RECEIVING', value: 'RECEIVING'},
     ];
 
     const handleSave = async () => {
@@ -47,7 +47,7 @@ const StationCreate: React.FC = () => {
                     flexDirection: 'column',
                     width: 450,
                     margin: 'auto',
-                    '& .MuiTextField-root': { marginBottom: 2 }
+                    '& .MuiTextField-root': {marginBottom: 2}
                 }}
             >
                 <TextField

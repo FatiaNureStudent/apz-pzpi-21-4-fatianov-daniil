@@ -18,20 +18,28 @@ interface Vehicle {
 
 const API_URL = 'http://localhost:8084/vehicle-station-service/station/';
 
-// Функція для отримання станцій, що підтримує фільтрацію за типом "BASING"
-const fetchStationsBasing = async (token: string): Promise<{ label: string; value: string }[]> => {
+const fetchStationsBasingForDropDown = async (token: string): Promise<{ label: string; value: string }[]> => {
     const response = await axios.get<Station[]>(`${API_URL}get-all`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
     });
-    // Фільтрація станцій за типом "BASING" і адаптація для дропдауна
+
     return response.data
         .filter(station => station.type === "BASING")
         .map(station => ({
             label: station.number,
             value: station.number
         }));
+}
+
+const fetchStationsBasing = async (token: string): Promise<Station[]> => {
+    const response = await axios.get<Station[]>(`${API_URL}get-all`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    return response.data.filter(station => station.type === "BASING");
 }
 
 interface Station {
@@ -67,11 +75,9 @@ const addStation = async (stationData: StationAddRequest, token: string): Promis
         Authorization: `Bearer ${token}`
     };
     try {
-        // Виконуємо POST запит для додавання станції
         await axios.post(`${API_URL}add`, stationData, { headers });
         console.log('Station added successfully');
     } catch (error: any) {
-        // Ловимо помилки, якщо запит не вдається
         throw new Error(`Failed to add station: ${error.response?.data.message || error.message}`);
     }
 };
@@ -100,7 +106,8 @@ const changeStation = async (stationData: StationChangeRequest, token: string): 
     }
 }
 
+export { fetchStationsBasing };
 export { changeStation };
 export { addStation };
 export { fetchStations };
-export { fetchStationsBasing };
+export { fetchStationsBasingForDropDown };

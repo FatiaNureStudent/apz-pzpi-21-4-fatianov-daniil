@@ -15,6 +15,8 @@ import VehicleChange from "./pages/VehicleChange";
 import Stations from "./pages/Stations";
 import StationCreate from "./pages/StationCreate";
 import StationChange from "./pages/StationChange";
+import Orders from "./pages/Orders";
+import OrderProcess from "./pages/OrderProcess";
 
 const App: React.FC = () => {
     return (
@@ -34,6 +36,8 @@ const App: React.FC = () => {
                                 <Route path="/stations" element={<Stations />} />
                                 <Route path="/stations/create" element={<StationCreate />} />
                                 <Route path="/stations/change/:id" element={<StationChange />} />
+                                <Route path="/orders" element={<Orders />} />
+                                <Route path="/orders/process/:id" element={<OrderProcess />} />
                             </Route>
                         </Routes>
                     </MainContent>

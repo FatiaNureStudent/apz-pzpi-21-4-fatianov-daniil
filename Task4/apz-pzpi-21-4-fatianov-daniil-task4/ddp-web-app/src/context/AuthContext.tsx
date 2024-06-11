@@ -1,42 +1,5 @@
-// import React, { createContext, useState, ReactNode, useContext } from 'react';
-// import { AuthService } from '../services/AuthService';
-//
-// interface AuthContextProps {
-//     isAuthenticated: boolean;
-//     token?: string;
-//     login: (email: string, password: string) => Promise<void>;
-//     logout: () => void;
-// }
-//
-// const AuthContext = createContext<AuthContextProps | undefined>(undefined);
-//
-// const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-//     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-//
-//     const login = async (email: string, password: string) => {
-//         const result = await AuthService.login(email, password);
-//         setIsAuthenticated(result.isAuthenticated);
-//         if (!result.isAuthenticated) {
-//             console.error('Login failed or user is not an administrator.');
-//         }
-//     };
-//
-//     const logout = () => {
-//         localStorage.removeItem('user');
-//         setIsAuthenticated(false);
-//     };
-//
-//     return (
-//         <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
-//             {children}
-//         </AuthContext.Provider>
-//     );
-// };
-//
-// export { AuthContext, AuthProvider };
-
-import React, { createContext, useState, ReactNode, useContext, useEffect } from 'react';
-import { AuthService } from '../services/AuthService';
+import React, {createContext, useState, ReactNode, useContext, useEffect} from 'react';
+import {AuthService} from '../services/AuthService';
 
 interface AuthContextProps {
     isAuthenticated: boolean;
@@ -47,12 +10,11 @@ interface AuthContextProps {
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+const AuthProvider: React.FC<{ children: ReactNode }> = ({children}) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [token, setToken] = useState<string | null>(localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!).token : null);
 
     useEffect(() => {
-        // Автоматичний логін, якщо токен є в localStorage
         const user = localStorage.getItem('user');
         if (user) {
             setIsAuthenticated(true);
@@ -63,7 +25,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const login = async (email: string, password: string) => {
         const result = await AuthService.login(email, password);
         if (result.isAuthenticated && result.token) {
-            localStorage.setItem('user', JSON.stringify({ token: result.token }));
+            localStorage.setItem('user', JSON.stringify({token: result.token}));
             setToken(result.token);
             setIsAuthenticated(true);
         } else {
@@ -79,10 +41,10 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, token, login, logout }}>
+        <AuthContext.Provider value={{isAuthenticated, token, login, logout}}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-export { AuthContext, AuthProvider };
+export {AuthContext, AuthProvider};

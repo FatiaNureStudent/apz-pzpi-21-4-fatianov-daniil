@@ -2,9 +2,8 @@ import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select, {SelectChangeEvent} from '@mui/material/Select';
 
-// Определяем интерфейс для пропсов компонента
 interface DropdownProps {
     options: { label: string; value: string }[];
     value: string;
@@ -29,7 +28,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     };
 
     return (
-        <FormControl fullWidth={fullWidth} sx={{ m: 1, minWidth: 120 }}>
+        <FormControl fullWidth={fullWidth} sx={{m: 1, minWidth: 120}}>
             <InputLabel id={`label-${label}`}>{label}</InputLabel>
             <Select
                 labelId={`label-${label}`}
@@ -37,7 +36,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 value={value}
                 label={label}
                 onChange={handleChange}
-                sx={{ '& .MuiSelect-select': { padding: '10px' } }}
+                sx={{'& .MuiSelect-select': {padding: '10px'}}}
             >
                 {options.map((option, index) => (
                     <MenuItem key={index} value={option.value}>

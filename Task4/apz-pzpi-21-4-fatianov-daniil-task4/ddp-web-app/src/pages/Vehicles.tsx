@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
-import { fetchVehicles } from '../services/VehicleService';
+import React, {useEffect, useState, useContext} from 'react';
+import {AuthContext} from '../context/AuthContext';
+import {fetchVehicles} from '../services/VehicleService';
 import DataTable from '../components/DataTable';
-import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import {Button} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 
 interface Vehicle {
     id: number;
@@ -86,7 +86,7 @@ const Vehicles: React.FC = () => {
                 tableRows={adaptedVehicles}
                 tableButton={{
                     buttonAction: (rowData) => {
-                        navigate(`/vehicles/change/${rowData.id}`);  // Використовуйте `id` з даних рядка
+                        navigate(`/vehicles/change/${rowData.id}`);
                     },
                     buttonLabel: 'Change'
                 }}

@@ -1,25 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
-  background: #333;
-  color: white;
-  padding: 1em;
+    background: #333;
+    color: white;
+    padding: 1em;
 `;
 
 const Nav = styled.nav`
-  ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 1em;
-  }
+    ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        gap: 1em;
+    }
 
-  a {
-    color: white;
-    text-decoration: none;
-  }
+    a {
+        color: white;
+        text-decoration: none;
+    }
 `;
 
 const Header: React.FC = () => {
@@ -28,7 +28,7 @@ const Header: React.FC = () => {
             <Nav>
                 <ul>
                     <li>
-                        <Link to="/">Orders</Link>
+                        <Link to="/orders">Orders</Link>
                     </li>
                     <li>
                         <Link to="/users">Users</Link>

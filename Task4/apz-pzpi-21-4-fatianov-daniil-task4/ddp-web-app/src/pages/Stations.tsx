@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
-import { fetchStations } from '../services/StationService';
+import React, {useEffect, useState, useContext} from 'react';
+import {AuthContext} from '../context/AuthContext';
+import {fetchStations} from '../services/StationService';
 import DataTable from '../components/DataTable';
-import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import {Button} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 
 interface Station {
     id: number;
@@ -20,9 +20,9 @@ interface AdaptedStation {
     id: number;
     number: string;
     description: string;
-    latitude: string;  // Змінено тип для представлення як рядок
-    longitude: string; // Змінено тип для представлення як рядок
-    altitude: string;  // Змінено тип для представлення як рядок
+    latitude: string;
+    longitude: string;
+    altitude: string;
     type: string;
     vehicleNumbers: string;
 }
@@ -31,9 +31,9 @@ const tableHeader: string[] = [
     'Id',
     'Number',
     'Description',
-    'Latitude',  // Додано
-    'Longitude', // Додано
-    'Altitude',  // Додано
+    'Latitude',
+    'Longitude',
+    'Altitude',
     'Type',
     'Vehicle Numbers',
     'Action'

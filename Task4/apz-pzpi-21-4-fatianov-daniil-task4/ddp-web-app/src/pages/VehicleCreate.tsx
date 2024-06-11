@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { addVehicle } from '../services/VehicleService';
-import { fetchStationsBasing } from '../services/StationService';
-import { Box, Button, TextField } from '@mui/material';
+import React, {useEffect, useState, useContext} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {AuthContext} from '../context/AuthContext';
+import {addVehicle} from '../services/VehicleService';
+import {fetchStationsBasingForDropDown} from '../services/StationService';
+import {Box, Button, TextField} from '@mui/material';
 import Dropdown from '../components/Dropdown';
 
 interface DropdownOption {
@@ -13,7 +13,7 @@ interface DropdownOption {
 
 const VehicleCreate: React.FC = () => {
     const navigate = useNavigate();
-    const authContext  = useContext(AuthContext);
+    const authContext = useContext(AuthContext);
     const token = authContext?.token;
     const [stations, setStations] = useState<DropdownOption[]>([]);
     const [station, setStation] = useState('');
@@ -23,7 +23,7 @@ const VehicleCreate: React.FC = () => {
 
     useEffect(() => {
         if (token) {
-            fetchStationsBasing(token).then(setStations).catch(console.error);
+            fetchStationsBasingForDropDown(token).then(setStations).catch(console.error);
         }
     }, [token]);
 

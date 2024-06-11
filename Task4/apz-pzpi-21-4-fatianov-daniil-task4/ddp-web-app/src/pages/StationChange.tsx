@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { changeStation, fetchStations } from '../services/StationService';
+import React, {useEffect, useState, useContext} from 'react';
+import {useParams, useNavigate} from 'react-router-dom';
+import {AuthContext} from '../context/AuthContext';
+import {changeStation, fetchStations} from '../services/StationService';
 import {Box, Button, TextField, Typography} from '@mui/material';
 
 interface Station {
@@ -15,7 +15,7 @@ interface Station {
 }
 
 const StationChange: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
+    const {id} = useParams<{ id: string }>();
     const authContext = useContext(AuthContext);
     const navigate = useNavigate();
     const token = authContext?.token;
@@ -53,9 +53,9 @@ const StationChange: React.FC = () => {
     if (!station) return <div>Loading or station not found...</div>;
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', width: 450, margin: 'auto' }}>
+        <Box sx={{display: 'flex', flexDirection: 'column', width: 450, margin: 'auto'}}>
             <h1>Change Station Details</h1>
-            <Typography variant="h6" sx={{ marginBottom: 2 }}>
+            <Typography variant="h6" sx={{marginBottom: 2}}>
                 Number: {station.number}
             </Typography>
             <TextField
@@ -63,7 +63,7 @@ const StationChange: React.FC = () => {
                 variant="outlined"
                 value={station.description}
                 onChange={(e) => setStation({...station, description: e.target.value})}
-                sx={{ marginBottom: 2 }}
+                sx={{marginBottom: 2}}
             />
             <TextField
                 label="Latitude"
@@ -71,7 +71,7 @@ const StationChange: React.FC = () => {
                 variant="outlined"
                 value={station.latitude.toString()}
                 onChange={(e) => setStation({...station, latitude: parseFloat(e.target.value)})}
-                sx={{ marginBottom: 2 }}
+                sx={{marginBottom: 2}}
             />
             <TextField
                 label="Longitude"
@@ -79,7 +79,7 @@ const StationChange: React.FC = () => {
                 variant="outlined"
                 value={station.longitude.toString()}
                 onChange={(e) => setStation({...station, longitude: parseFloat(e.target.value)})}
-                sx={{ marginBottom: 2 }}
+                sx={{marginBottom: 2}}
             />
             <TextField
                 label="Altitude"
@@ -87,12 +87,12 @@ const StationChange: React.FC = () => {
                 variant="outlined"
                 value={station.altitude.toString()}
                 onChange={(e) => setStation({...station, altitude: parseFloat(e.target.value)})}
-                sx={{ marginBottom: 2 }}
+                sx={{marginBottom: 2}}
             />
             <Button onClick={handleSave} variant="contained" color="primary">
                 Save
             </Button>
-            <Button variant="contained" color="secondary" sx={{ marginTop: 2 }}>
+            <Button variant="contained" color="secondary" sx={{marginTop: 2}}>
                 Delete
             </Button>
         </Box>

@@ -20,4 +20,4 @@ const fetchUsers = async (token: string): Promise<User[]> => {
     return response.data;
 }
 
-export { fetchUsers };
+export {fetchUsers};

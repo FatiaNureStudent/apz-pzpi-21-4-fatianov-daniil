@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { Button, TextField } from '@mui/material';
+import React, {useContext, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {AuthContext} from '../context/AuthContext';
+import {Button, TextField} from '@mui/material';
 
 const Login: React.FC = () => {
     const authContext = useContext(AuthContext);
@@ -36,7 +36,7 @@ const Login: React.FC = () => {
     return (
         <div>
             <h1>Login</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p style={{color: 'red'}}>{error}</p>}
             <form onSubmit={handleLogin}>
                 <div>
                     <TextField

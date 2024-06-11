@@ -208,6 +208,7 @@ public class OrderService {
             orderAdminGetResponse.setReceiptCode(order.getReceiptCode());
             orderAdminGetResponse.setStatus(order.getStatus());
             orderAdminGetResponse.setCreationDate(order.getCreationDate().atZone(ZoneOffset.UTC));
+            orderAdminGetResponse.setItems(order.getItems());
 
             String token = authHeader.substring(7);
 
