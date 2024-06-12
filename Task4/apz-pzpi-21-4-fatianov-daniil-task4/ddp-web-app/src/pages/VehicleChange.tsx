@@ -17,7 +17,7 @@ const VehicleChange: React.FC = () => {
     const navigate = useNavigate();
     const token = authContext?.token;
     const [vehicle, setVehicle] = useState<Vehicle | null>(null);
-    const [vehicles, setVehicles] = useState<Vehicle[]>([]); // Масив усіх транспортних засобів
+    const [vehicles, setVehicles] = useState<Vehicle[]>([]);
 
     useEffect(() => {
         fetchVehicles(token!).then(setVehicles);
